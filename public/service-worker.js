@@ -11,7 +11,7 @@ self.addEventListener("install",function(e){
     e.waitUntil(
        caches.open(cacheName).then(function(cache){
            console.log("{Servive Worker} Caching all the files");
-           return cache.addAll(cachFiles);
+           return cache.addAll(cacheFiles);
        })
     );
    
