@@ -15,7 +15,7 @@
               "type":"image/png"
         }
      ],
-     "start_url":"/cw3-group-frontend/public/index.html",
+     "start_url":"public/index.html",
      "display":"fullscreen",
       "background_colour":"#D3D3D3"
 
