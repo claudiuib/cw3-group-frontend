@@ -1,5 +1,5 @@
 var cacheName ="lessons-shop";
-var  cachFiles = [
+var  cacheFiles = [
     "index.html",
     "images/dino-192.png",
     "images/hacker-512.png",
