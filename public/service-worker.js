@@ -26,10 +26,11 @@ self.addEventListener("install",function(e){
                 return cachedFiles
             } else{
                 return fetch (e.request).then(function(response){
+
                     return caches.open(cacheName).then(function(cache){
-                        cache.put(e.request,response.clone());
+                        cache.put(e.request,  response.clone());
                         console.log("{Service Work} resource fetch  and saved in the cache :"
-                        +e.request.url);
+                        + e.request.url);
                         return response;
                     });
                 });

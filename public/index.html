@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
@@ -324,33 +325,6 @@
 
 
 
-
-// addData() {
-     
-//      fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket")
-//     .then(response => response.json())
-//     .then(data => {
-//     this.basket = data;
-    
-//         });
-//         },
-
-
-//method to delete basket
-// deleteBasket(order_id){
-// fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/basket/${order_id}`, {
-//   method: 'DELETE',
-//   headers: {
-//     'Content-Type': 'application/json'
-//   }
-// })
-// .then(res => res.json())
-// .then((data) => {
-//   console.log(data); // data received by server
-// })
-// .catch(err => console.log(err))
-
-// },
 remove: function(product){
             if(this.basket.includes(product)){
                 let index = this.basket.indexOf(product);
