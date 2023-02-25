@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+ <link rel="icon" type ="image/x-icon" href="./images/cyber.ico">
+        <!-- manifest link connection        -->
+ <link rel ="manifest" href="lessons-shop.webmanifest">
+</head>
+<div id="app">
+
+    <!-- Navigation bar -->
+    <div v-if="showLessons">
+        <header>
+            <title>Lessons</title>
+            <div class="navbar navbar-dark bg-primary">
+                <div class="navbar­header">
+                    <h1>Lessons</h1>
+                </div>
+                <div class="nav navbar­nav navbar ­right cart">
+
+                    <!-- button shopping cart -->
+
+                    <!-- <button :disabled="this.cart.length > 0 ? false : true" class="btn  btn-info mx-4" v-on:click="showCheckout"> -->
+                    <button class="btn  btn-info mx-4" v-on:click="showCheckout">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-cart" viewBox="0 0 16 16">
+                            <path
+                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg> Shopping Cart
+                    </button>
+
+
+                </div>
+            </div>
+        </header>
+
+        <body>
+
+            <!-- Filter option -->
+            <!-- show the main page -->
+
+            <div class="sort container mt-5">
+                <div class="row">
+
+                    <div class="col-3">
+                        <!-- search bar -->
+                        <label for="site-search">Search </label>
+                        <input type="search" v-model="search" @keyup="searchProducts()"/>
+
+                        
+
+
+                        <div class="form-check">
+
+                            <p>Sort By</p>
+                            <input class="form-check-input" type="radio" value="title" name="flexRadioDefault"
+                                v-model="sortBy" id="flexRadioDefault1" />
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Subject
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" v-model="sortBy"
+                                id="flexRadioDefault2" value="location" />
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Location
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" v-model="sortBy"
+                                id="flexRadioDefault3" value="price" />
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                Price
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" v-model="sortBy"
+                                id="flexRadioDefault4" value="spaces" />
+                            <label class="form-check-label" for="flexRadioDefault4">
+                                Availability
+                            </label>
+                        </div>
+
+
+                        <div class="form-check mt-5">
+                            <input class="form-check-input" type="radio" name="sort" id="flexCheckDefault-Ascending"
+                                value="ascending" v-model="direction" />
+                            <label class="form-check-label" for="flexCheckDefault-Ascending">
+                                Ascending
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="flexCheckDefault-Deascending"
+                                value="descending" v-model="direction" />
+                            <label class="form-check-label" for="flexCheckDefault-Descending">
+                                Descending
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- card body -->
+
+                    <div class="col-md">
+                        <div>
+                            <div class="row ">
+                                <div class="card my-2 mx-2" style="width: 18rem;" v-for="lesson in lessons">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card-body">
+                                                <p class="card-title">Title:{{lesson.title}}</p>
+                                                <h5> Places:{{lesson.spaces}} </h5>
+                                                <p class="card-title">Location:{{lesson.location}}</p>
+                                                <p class="card-text">Price: £ {{lesson.price}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <img class="img-fluid img-thumbnail" v-bind:src="lesson.image">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center mt-2 mb-2">
+                                                <button class=" btn btn-primary btn-lg"
+                                                    v-on:click="addProduct(lesson)">Add to
+                                                    cart</button>
+                                                <!-- <button disabled="true" class=" btn btn-primary btn-lg" v-else>Add to cart</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </body>
+    </div>
+    <!-- Checkout page -->
+    <div v-else>
+        <title>Lessons</title>
+        <div class="navbar navbar-dark bg-primary">
+            <div class="navbar­header">
+                <h1>Shopping Cart</h1>
+            </div>
+            <div class="nav navbar­nav navbar ­right cart">
+                <!-- button shopping cart -->
+
+                <button class="btn  btn-info  mx-4" v-on:click="showCheckout">
+                    Home
+                </button>
+
+
+            </div>
+        </div>
+
+
+
+        <body>
+
+            <!--  bootstrap card body  -->
+            <div class="container">
+
+                <div class="row">
+                    <div class="card  my-2 mx-2 mt-5 mb-5 " style="width: 18rem;" v-for="product in tempBasket">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-title">Title:{{product.title}}</p>
+                                    <p class="card-title">Location:{{product.location}}</p>
+                                    <p class="card-text">Price:£ {{product.price}}</p>
+                                    <p class="card-text">Spaces Selected :{{tcardCount(product)}}</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <img class="img-fluid img-thumbnail" v-bind:src="product.image">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center mt-2 mb-2">
+                                <button class="btn btn-primary" v-on:click="remove(product)">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout form -->
+            <div class="d-flex justify-content-center mt-5 mb-5">
+                <h5>
+                    Checkout
+                </h5>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col order-last">
+                        <button :disabled="!formIsValid" class="btn btn-primary"
+                            v-on:click="submitForm">Checkout</button>
+
+                    </div>
+                    <div class="col">
+                        Phone:
+                        <input v-model="phone " id="phone" />
+                        <p v-if="!phoneIsValid" class="error message">Only numbers allowed</p>
+
+                    </div>
+                    <div class="col order-first">
+                        Name :
+                        <input v-model="name " id="name" />
+                        <p v-if="!nameIsValid" class="error message">Only letters allowed</p>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </body>
+
+
+
+
+
+
+</div>
+
+
+<!-- Vue js properties -->
+<script type="text/javascript ">
+    var APP_LOG_LIFECYCLE_EVENTS = true;
+        // Vue Object contains data
+      
+   var app = new Vue({
+   
+   
+    el: '#app',
+    data:{
+      
+                      
+      name: null,
+      phone :null,
+      showLessons: true,
+      showOrder :true,
+      sortBy: "",
+      direction: "ascending",
+      search: "",
+        
+      lessons:[],
+      basket:[],
+      tempBasket:[]
+      
+      
+    },
+    // When the sorting value or direction changes
+    watch: {
+          sortBy() {
+            this.sortLessons();
+          },
+          direction() {
+            this.sortLessons();
+          },
+        },
+              
+        titleSearch: function(val) {
+      this.filteredLessons = this.filterLessons()
+        },
+
+  
+ methods: {
+    count(id) {
+            let count = 0;
+            for (let i = 0; i < this.basket.length; i++) {
+              if (this.basket[i] == id) {
+                count++;
+              }
+            }
+            return count;
+          },
+        
+          productLeft(lesson) {
+            for(let i=0;i<this.lessons.length;i++){
+              if(lesson==this.lessons[i]){
+                return this.lessons[i].spaces;
+              }
+            }
+            
+          },  
+   
+          addProduct(lesson) {
+            if(lesson.spaces>= 1){
+                 lesson.spaces = lesson.spaces - 1;
+                this.basket.push(lesson);
+               if(!(this.tempBasket.includes(lesson))){
+                        this.tempBasket.push(lesson);
+               }
+                }
+            },
+
+
+
+
+ displayData() {
+     
+     fetch("https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products")
+    .then(response => response.json())
+    .then(lessons => {
+    this.lessons = lessons;
+    
+        });
+        },
+
+
+
+
+
+// addData() {
+     
+//      fetch("http://lessoncw-env.eba-yyeszmgi.eu-west-2.elasticbeanstalk.com/collections/basket")
+//     .then(response => response.json())
+//     .then(data => {
+//     this.basket = data;
+    
+//         });
+//         },
+
+
+//method to delete basket
+// deleteBasket(order_id){
+// fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/basket/${order_id}`, {
+//   method: 'DELETE',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// })
+// .then(res => res.json())
+// .then((data) => {
+//   console.log(data); // data received by server
+// })
+// .catch(err => console.log(err))
+
+// },
+remove: function(product){
+            if(this.basket.includes(product)){
+                let index = this.basket.indexOf(product);
+                this.basket.splice(index, 1);
+                for (let i  = 0; i  < this.lessons.length; i++){
+                    if(product ==this.lessons[i]){
+                        this.lessons[i].spaces ++;
+                    }
+                }
+                }
+            },
+showCheckout() {
+          this.showLessons = this.showLessons ? false : true;
+        },
+//function to submit order 
+ submitForm() {
+            if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
+      //send details to the database 
+      fetch('https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/order', {
+        method: 'post',
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          name: this.name,
+          phone: this.phone,
+          basket: this.basket
+        })
+      })
+      .then(response => response.json())
+      
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+     alert("Order submited")
+     for(let i=0;i<this.tempBasket.length;i++){
+                      
+                      let tempB=this.tempBasket[i];
+                     console.log( app.productLeft(tempB));
+                     console.log(tempB.id)
+                      fetch("https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products/" + tempB.id, {
+                          method: "PUT",
+                          headers: {"Content-Type": "application/json",}, 
+                          body: JSON.stringify(
+                        {"spaces": app.productLeft(tempB)})})
+                        .then(function (response) {
+                          response.json().then(function (json) 
+                          {console.log(json)});});
+
+                }
+              }
+                else{
+                    alert("Error Validation Failed")
+                }
+           
+          },
+
+          tcardCount: function(product){
+                let c=0;
+                for (let i = 0; i < this.basket.length; i++) {
+                  if(this.basket[i]==product){
+                    c=c+1;
+                  }
+                    
+                }
+                return c;
+            },
+
+  //function to search
+      
+  async searchProducts() {
+      try {
+        const response = await fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
+        const data = await response.json();
+        const filteredProducts =  data.filter(p => p.title.includes(this.search) || p.location.includes(this.search));;
+        this.lessons = filteredProducts;
+    
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+      
+        
+          
+       
+    computed: {
+       
+        //checkout validation functions
+        nameIsValid() {
+                    return /[a-zA-Z]/.test(this.name);
+                },
+        phoneIsValid() {
+                    return /[0-9]/.test(this.phone)
+                },
+        formIsValid() {
+                    return  this.nameIsValid && this.phoneIsValid
+                },
+        
+
+       
+        
+       
+       
+
+  
+    },
+  
+    created(){
+       
+        this.displayData();
+       
+        if("serviceWorker" in navigator){
+            navigator.serviceWorker.register("service-worker.js");
+        }
+    },
+ 
+   
+ 
+    
+       
+    });
+      
+    </script>
+
+
+</body>
+
+</html>

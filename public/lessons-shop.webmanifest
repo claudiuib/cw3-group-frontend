@@ -1,0 +1,23 @@
+{
+  
+    "name": "Our Lessons Shop",
+     "short_name" :"Lessons_Shop",
+     "description" :"Our online lessons shop",
+     "icons":[
+        {
+            "src":"images/dino-192.png",
+             "sizes":"192x192",
+              "type":"image/png"
+        },
+        {
+            "src":"images/hacker-512.png",
+             "sizes":"512x512",
+              "type":"image/png"
+        }
+     ],
+     "start_url":"index.html",
+     "display":"fullscreen",
+      "background_colour":"#D3D3D3"
+
+
+}
