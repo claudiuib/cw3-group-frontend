@@ -47,22 +47,22 @@
 
             <!-- Filter option -->
             <!-- show the main page -->
-            
+
             <!-- buttons for caches -->
-            <div class="container">
+            <div class="container mt-2">
                 <div class="row">
-                  <div class="col-sm">
+                  <div class="col">
                     <button type="button" class="btn btn-primary" v-on:click="deleteAllCaches">Delete All
                         Caches</button>
                   </div>
-                  <div class="col-sm">
+                  <div class="col">
                     <button type="button" class="btn btn-primary" v-on:click="reloadPage">Reload Page</button>
                   </div>
-                  <div class="col-sm">
+                  <div class="col">
                     <button type="button" class="btn btn-primary "
                     v-on:click=" unregisterAllServiceWorkers">Unregister Service Worker</button>
                   </div>
-                  <div class="col-sm">
+                  <div class="col">
                     <a href="#" v-bind:href="url" class="link-info">Info link</a>
                   </div>
                 </div>
