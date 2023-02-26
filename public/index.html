@@ -55,7 +55,11 @@
                         <!-- search bar -->
                         <label for="site-search">Search </label>
                         <input type="search" v-model="search" @keyup="searchProducts()"/>
-
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary" v-on:click="deleteAllCaches">Delete All Caches</button>
+                            <button type="button" class="btn btn-secondary"v-on:click="reloadPage">Reload Page</button>
+                            <button type="button" class="btn btn-secondary" v-on:click=" unregisterAllServiceWorkers">Unregister Service Worker</button>
+                          </div>
                         
 
 
@@ -405,7 +409,27 @@ showCheckout() {
         console.error(err);
       }
     },
-  },
+    // method to delete caches
+    deleteAllCaches() {
+            caches.keys().then(function(names) {
+            for (let name of names)
+            caches.delete(name);
+            });
+            },
+
+    //   unreg service worker 
+    unregisterAllServiceWorkers() {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                registration.unregister()
+            }
+            }); 
+            console.log("ServiceWorkers Unregistered");
+            }  ,
+            reloadPage() {
+        window.location.reload();
+            },   
+        }
       
         
           
