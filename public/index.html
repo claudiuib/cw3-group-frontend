@@ -47,6 +47,21 @@
 
             <!-- Filter option -->
             <!-- show the main page -->
+               <!-- button options -->
+               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-primary" v-on:click="deleteAllCaches">Delete All
+                        Caches</button>
+                </div>   
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-primary" v-on:click="reloadPage">Reload Page</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Third group"> 
+                    <button type="button" class="btn btn-primary "
+                    v-on:click=" unregisterAllServiceWorkers">Unregister Service Worker</button>
+                    <a href="#" v-bind:href="url" class="link-info">Info link</a>
+                </div>
+            </div>
 
             <div class="sort container mt-5">
                 <div class="row">
@@ -55,21 +70,7 @@
                         <!-- search bar -->
                         <label for="site-search">Search </label>
                         <input type="search" v-model="search" @keyup="searchProducts()" />
-                        <!-- button options -->
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-secondary" v-on:click="deleteAllCaches">Delete All
-                                    Caches</button>
-                            </div>   
-                            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                <button type="button" class="btn btn-secondary" v-on:click="reloadPage">Reload Page</button>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="Third group"> 
-                                <button type="button" class="btn btn-danger "
-                                v-on:click=" unregisterAllServiceWorkers">Unregister Service Worker</button>
-                                <a href="#" v-bind:href="url" class="link-info">Info link</a>
-                            </div>
-                        </div>
+                    
 <!--                         
                         <div class="btn-group btn-group-sm"  aria-label="Basic example">
                             <button type="button" class="btn btn-secondary" v-on:click="deleteAllCaches">Delete All
