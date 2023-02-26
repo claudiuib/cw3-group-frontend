@@ -55,12 +55,13 @@
                         <!-- search bar -->
                         <label for="site-search">Search </label>
                         <input type="search" v-model="search" @keyup="searchProducts()" />
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary" v-on:click="deleteAllCaches">Delete All
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-danger" v-on:click="deleteAllCaches">Delete All
                                 Caches</button>
-                            <button type="button" class="btn btn-secondary" v-on:click="reloadPage">Reload Page</button>
-                            <button type="button" class="btn btn-secondary"
+                            <button type="button" class="btn btn-success" v-on:click="reloadPage">Reload Page</button>
+                            <button type="button" class="btn btn-danger "
                                 v-on:click=" unregisterAllServiceWorkers">Unregister Service Worker</button>
+                                <a href="#" v-bind:href="url" class="link-info">Info link</a>
                         </div>
 
 
@@ -255,7 +256,7 @@
     el: '#app',
     data:{
       
-                      
+      url:"https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products"                
       name: null,
       phone :null,
       showLessons: true,
@@ -385,7 +386,7 @@ showCheckout() {
                     alert("Error Validation Failed")
                 }
            
-          },
+   },
 
           tcardCount: function(product){
                 let c=0;
@@ -428,10 +429,10 @@ showCheckout() {
             }); 
             console.log("ServiceWorkers Unregistered");
             }  ,
-            reloadPage() {
+   reloadPage() {
         window.location.reload();
             },   
-        },
+    },
       
         
           
