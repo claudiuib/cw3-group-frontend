@@ -265,7 +265,7 @@
     el: '#app',
     data:{
       
-      url:"https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products",                
+      url:"https://cw3-env.eba-zsifjhza.eu-west-2.elasticbeanstalk.com/collections/products",                
       name: null,
       phone :null,
       showLessons: true,
@@ -330,7 +330,7 @@
 
  displayData() {
      
-     fetch("https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products")
+     fetch("https://cw3-env.eba-zsifjhza.eu-west-2.elasticbeanstalk.com/collections/products")
     .then(response => response.json())
     .then(lessons => {
     this.lessons = lessons;
@@ -359,7 +359,7 @@ showCheckout() {
  submitForm() {
             if (this.nameIsValid && this.phoneIsValid && this.formIsValid) {
       //send details to the database 
-      fetch('https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/order', {
+      fetch('https://cw3-env.eba-zsifjhza.eu-west-2.elasticbeanstalk.com/collections/order', {
         method: 'post',
         headers: {
           "Content-type": "application/json"
@@ -380,7 +380,7 @@ showCheckout() {
                       let tempB=this.tempBasket[i];
                      console.log( app.productLeft(tempB));
                      console.log(tempB.id)
-                      fetch("https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products/" + tempB.id, {
+                      fetch("https://cw3-env.eba-zsifjhza.eu-west-2.elasticbeanstalk.com/collections/products" + tempB.id, {
                           method: "PUT",
                           headers: {"Content-Type": "application/json",}, 
                           body: JSON.stringify(
@@ -412,7 +412,7 @@ showCheckout() {
       
   async searchProducts() {
       try {
-        const response = await fetch(`https://cw3-env.eba-sy9g72si.us-east-1.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
+        const response = await fetch(`https://cw3-env.eba-zsifjhza.eu-west-2.elasticbeanstalk.com/collections/products/search?q=${this.search}`);
         const data = await response.json();
         const filteredProducts =  data.filter(p => p.title.includes(this.search) || p.location.includes(this.search));;
         this.lessons = filteredProducts;
